@@ -4,9 +4,15 @@ import { getMeta } from '@/app/_libs/microcms';
 import Footer from '@/app/_components/Footer';
 import Header from '@/app/_components/Header';
 import './globals.css';
+import { Noto_Sans_JP } from 'next/font/google';
 import styles from './layout.module.css';
+import theme from './theme';
+
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
 
 export const revalidate = 60;
+const notoSansJP = Noto_Sans_JP({ subsets: ['latin'], weight: ['400'] });
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getMeta();
@@ -43,11 +49,14 @@ export default async function RootLayout({ children }: Props) {
         defer
         src={`//js.hs-scripts.com/${process.env.HUBSPOT_PORTAL_ID}.js`}
       ></Script>
-      <body className={styles.body}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <body className={styles.body}>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

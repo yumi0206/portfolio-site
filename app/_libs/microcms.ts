@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createClient } from 'microcms-js-sdk';
 import type {
   MicroCMSQueries,
@@ -6,6 +7,20 @@ import type {
   MicroCMSContentId,
 } from 'microcms-js-sdk';
 import { notFound } from 'next/navigation';
+
+//ギャラリーの型定義?
+export type GalleryType = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+  image: MicroCMSImage;
+  caption: string;
+  category: Category;
+};
+
+export type AlbumSelector = {};
 
 // カテゴリーの型定義
 export type Category = {
@@ -20,22 +35,6 @@ export type News = {
   content: string;
   thumbnail?: MicroCMSImage;
   category: Category;
-};
-
-// メンバーの型定義
-export type Member = {
-  name: string;
-  position: string;
-  profile: string;
-  image?: MicroCMSImage;
-};
-
-// 事業内容の型定義
-export type Business = {
-  logo?: MicroCMSImage;
-  description: string;
-  image?: MicroCMSImage;
-  link: string;
 };
 
 // メタ情報の型定義
@@ -64,30 +63,6 @@ export const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY,
 });
 
-// ニュース一覧を取得
-export const getNewsList = async (queries?: MicroCMSQueries) => {
-  const listData = await client
-    .getList<News>({
-      endpoint: 'news',
-      queries,
-    })
-    .catch(notFound);
-  return listData;
-};
-
-// ニュースの詳細を取得
-export const getNewsDetail = async (contentId: string, queries?: MicroCMSQueries) => {
-  const detailData = await client
-    .getListDetail<News>({
-      endpoint: 'news',
-      contentId,
-      queries,
-    })
-    .catch(notFound);
-
-  return detailData;
-};
-
 // カテゴリーの一覧を取得
 export const getCategoryList = async (queries?: MicroCMSQueries) => {
   const listData = await client
@@ -113,28 +88,6 @@ export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQue
   return detailData;
 };
 
-// メンバー一覧を取得
-export const getMembersList = async (queries?: MicroCMSQueries) => {
-  const listData = await client
-    .getList<Member>({
-      endpoint: 'members',
-      queries,
-    })
-    .catch(notFound);
-  return listData;
-};
-
-// 事業内容一覧を取得
-export const getBusinessList = async (queries?: MicroCMSQueries) => {
-  const listData = await client
-    .getList<Business>({
-      endpoint: 'business',
-      queries,
-    })
-    .catch(notFound);
-  return listData;
-};
-
 // メタ情報を取得
 export const getMeta = async (queries?: MicroCMSQueries) => {
   const data = await client
@@ -146,3 +99,4 @@ export const getMeta = async (queries?: MicroCMSQueries) => {
 
   return data;
 };
+
