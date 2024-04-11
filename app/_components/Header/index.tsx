@@ -40,7 +40,7 @@ const Header: React.FC = () => {
           }}
         >
           {navItems.map((item) => (
-            <Link href={item.href}>
+            <Link href={item.href} key={item.label}>
               <Typography>{item.label}</Typography>
             </Link>
           ))}
