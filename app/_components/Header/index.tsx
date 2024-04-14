@@ -6,6 +6,7 @@ import { AppBar, Toolbar, Typography, Box, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import MobileMenu from './MobileMenu'; // MobileMenu コンポーネントをインポート
+import { josefinSans } from '@/app/_libs/font';
 
 const Header: React.FC = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
@@ -16,12 +17,13 @@ const Header: React.FC = () => {
 
   const navItems = [
     { label: 'About', href: '/about' },
-    { label: 'Blog', href: '/blog' },
+    { label: 'Blog', href: '/blogs' },
     { label: 'Gallery', href: '/gallery' },
   ];
 
   return (
     <AppBar
+      className={josefinSans.className}
       position="static"
       color="transparent"
       elevation={0}

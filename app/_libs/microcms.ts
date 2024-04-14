@@ -100,3 +100,20 @@ export const getMeta = async (queries?: MicroCMSQueries) => {
   return data;
 };
 
+type Thumbnail = {
+  url: string;
+  height: number;
+  width: number;
+};
+
+export type BlogType = {
+  id: string;
+  title: string;
+  content: string;
+  thumbnail: Thumbnail;
+  category?: Category;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+};

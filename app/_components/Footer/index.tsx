@@ -5,6 +5,8 @@ export default function Footer() {
   return (
     <Box
       sx={{
+        bgcolor: 'white',
+        zIndex: 100,
         padding: '16px 24px',
         textAlign: 'center',
         color: 'var(--color-text-sub)',

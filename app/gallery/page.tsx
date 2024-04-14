@@ -1,10 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import { gsap } from 'gsap';
-import Image from 'next/image';
 import { Category, GalleryType } from '../_libs/microcms';
-import CategorySelector from '../_components/Gallery/CategorySelector';
 import { client } from '../client';
 import GalleryComponent from '../_components/Gallery/GalleryComponent';
 
@@ -19,11 +14,12 @@ const getData = async (): Promise<GalleryResponse> => {
       endpoint: 'galleries',
       queries: { limit: 100 },
       customRequestInit: {
-        next:{
-          revalidate:3600
-        }
+        next: {
+          revalidate: 3600,
+        },
       },
     });
+
     const categories = await client.get({ endpoint: 'categories', queries: { limit: 100 } });
     return {
       galleries: galleries.contents,

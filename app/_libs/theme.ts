@@ -1,6 +1,9 @@
-"use client"
+'use client';
 
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
+import { josefinSans, mPlus1Code } from './font';
+
+const fontFamily = [josefinSans.style.fontFamily, mPlus1Code.style.fontFamily].join(' ');
 
 // Create a theme instance.
 const theme = createTheme({
@@ -10,6 +13,7 @@ const theme = createTheme({
     },
   },
   typography: {
+    fontFamily: fontFamily,
     button: {
       color: '#4fa479',
       fontWeight: 700,

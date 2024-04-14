@@ -4,15 +4,14 @@ import { getMeta } from '@/app/_libs/microcms';
 import Footer from '@/app/_components/Footer';
 import Header from '@/app/_components/Header';
 import './globals.css';
-import { Noto_Sans_JP } from 'next/font/google';
-import styles from './layout.module.css';
-import theme from './theme';
+
+import theme from './_libs/theme';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
+import { josefinSans, mPlus1Code } from './_libs/font';
 
 export const revalidate = 60;
-const notoSansJP = Noto_Sans_JP({ subsets: ['latin'], weight: ['400'] });
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getMeta();
@@ -41,7 +40,7 @@ type Props = {
 
 export default async function RootLayout({ children }: Props) {
   return (
-    <html lang="ja">
+    <html lang="ja" className={[josefinSans.className, mPlus1Code.className].join(' ')}>
       <Script
         type="text/javascript"
         id="hs-script-loader"
@@ -51,7 +50,7 @@ export default async function RootLayout({ children }: Props) {
       ></Script>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <body className={styles.body}>
+        <body>
           <Header />
           <main>{children}</main>
           <Footer />

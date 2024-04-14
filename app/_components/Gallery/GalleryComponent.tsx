@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
-import { gsap } from 'gsap';
-import Image from 'next/image';
+import React, { useMemo, useState } from 'react';
 import CategorySelector from './CategorySelector';
 import { Category, GalleryType } from '@/app/_libs/microcms';
-import { Grid, Modal, Box, Button, Typography } from '@mui/material';
+import { Grid, Box, Typography, TextField, InputAdornment, IconButton } from '@mui/material';
+import GalleryModal from './GalleryModal';
+import SearchIcon from '@mui/icons-material/Search'; // Importing the SearchIcon
 
 type GalleryComponentProps = {
   galleries: GalleryType[];
@@ -11,32 +11,70 @@ type GalleryComponentProps = {
 };
 
 const GalleryComponent: React.FC<GalleryComponentProps> = ({ galleries, categories }) => {
-  const [showModal, setShowModal] = React.useState(false);
-  const [selectedImage, setSelectedImage] = React.useState('');
-  const [selectedCategory, setSelectedCategory] = React.useState('all');
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchText, setSearchText] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchIconClick = () => {
+    setSearchText(searchInput);
+  };
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      setSearchText(searchInput);
+    }
+  };
 
   const handleImageClick = (url: string) => {
     setSelectedImage(url);
     setShowModal(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
   const filteredGalleries = useMemo(() => {
-    return selectedCategory === 'all'
-      ? galleries
-      : galleries.filter((gallery) => gallery.category.name === selectedCategory);
-  }, [selectedCategory, galleries]);
+    const categoryFiltered =
+      selectedCategory === 'all'
+        ? galleries
+        : galleries.filter((gallery) => gallery.category.name === selectedCategory);
+    return categoryFiltered.filter((gallery) =>
+      gallery.caption.toLowerCase().includes(searchText.toLowerCase()),
+    );
+  }, [selectedCategory, galleries, searchText]);
 
   return (
     <>
-      <CategorySelector
-        categories={categories}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <CategorySelector
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+
+        <TextField
+          placeholder="Search by Caption"
+          variant="outlined"
+          value={searchInput}
+          onChange={handleSearchChange}
+          onKeyDown={handleKeyDown}
+          
+          InputLabelProps={{
+            shrink: searchInput.length > 0,
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <IconButton onClick={handleSearchIconClick} aria-label="search">
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
 
       <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', p: 2 }}>
         <Grid container spacing={2} justifyContent="center">
@@ -63,7 +101,7 @@ const GalleryComponent: React.FC<GalleryComponentProps> = ({ galleries, categori
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    objectFit: 'contain', // ここでobjectFitをcoverに設定
+                    objectFit: 'contain',
                   }}
                 />
                 <Box
@@ -90,40 +128,11 @@ const GalleryComponent: React.FC<GalleryComponentProps> = ({ galleries, categori
           ))}
         </Grid>
 
-        <Modal
-          open={showModal}
-          onClose={handleCloseModal}
-          aria-labelledby="image-modal-title"
-          aria-describedby="image-modal-description"
-        >
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: 'auto',
-              maxWidth: '90%',
-              bgcolor: 'background.paper',
-              border: '2px solid #000',
-              boxShadow: 24,
-              p: 2,
-              outline: 'none',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={selectedImage}
-              alt="Selected"
-              width={800}
-              height={450}
-              layout="responsive"
-            />
-            <Button variant="contained" onClick={handleCloseModal} sx={{ mt: 2 }}>
-              Close
-            </Button>
-          </Box>
-        </Modal>
+        <GalleryModal
+          showModal={showModal}
+          handleCloseModal={() => setShowModal(false)}
+          selectedImage={selectedImage}
+        />
       </Box>
     </>
   );
