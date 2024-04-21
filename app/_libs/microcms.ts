@@ -8,7 +8,7 @@ import type {
 } from 'microcms-js-sdk';
 import { notFound } from 'next/navigation';
 
-//ギャラリーの型定義?
+//ギャラリーの型定義
 export type GalleryType = {
   id: string;
   createdAt: string;

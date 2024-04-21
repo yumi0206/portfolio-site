@@ -1,15 +1,17 @@
-// Header.tsx または同等のファイル
 'use client';
 
 import React from 'react';
 import { AppBar, Toolbar, Typography, Box, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
-import MobileMenu from './MobileMenu'; // MobileMenu コンポーネントをインポート
+
+import MobileMenu from './MobileMenu';
 import { josefinSans } from '@/app/_libs/font';
+import useStore from '@/app/_libs/useStore';
 
 const Header: React.FC = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
+  const isLogin = useStore((state) => state.isLogin);
 
   const handleMobileDrawerClose = () => {
     setMobileDrawerOpen(false);
@@ -19,7 +21,11 @@ const Header: React.FC = () => {
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '/blogs' },
     { label: 'Gallery', href: '/gallery' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'Login', href: '/login' },
   ];
+
+  const filteredNavItems = isLogin ? navItems.filter((item) => item.label !== 'Login') : navItems;
 
   return (
     <AppBar
@@ -27,7 +33,7 @@ const Header: React.FC = () => {
       position="static"
       color="transparent"
       elevation={0}
-      sx={{ padding: { xs: '10px', sm: '27px 65px' }, color: '#4FA479', fontSize: '17px' }}
+      sx={{ padding: { xs: '10px', sm: '27px 65px' }, color: 'primary.main', fontSize: '17px' }}
     >
       <Toolbar disableGutters>
         <Link href="/" passHref>
@@ -41,7 +47,7 @@ const Header: React.FC = () => {
             gap: 3,
           }}
         >
-          {navItems.map((item) => (
+          {filteredNavItems.map((item) => (
             <Link href={item.href} key={item.label}>
               <Typography>{item.label}</Typography>
             </Link>

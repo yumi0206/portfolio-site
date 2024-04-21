@@ -3,42 +3,73 @@ import { Avatar, Container, Typography, Box } from '@mui/material';
 
 const About = () => {
   return (
-    // コンテナ全体を画面の中央に配置
     <Container
       sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '100vh',
+        height: '50vh',
+        justifyContent: 'center',
+        padding: '20px',
       }}
     >
       <Box
         sx={{
-          textAlign: 'center',
-          justifyContent: 'center',
           display: 'flex',
-          flexDirection: 'column',
-          gap: 1,
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: 'center',
+          textAlign: { xs: 'center', md: 'left' },
+          gap: 4,
         }}
       >
-        <Avatar
-          src="/avater.jpg"
+        <Box
           sx={{
-            width: 90,
-            height: 90,
-            border: '3px solid lightgreen',
-            mb: 2,
-            mx: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2,
           }}
-        />
+        >
+          <Avatar
+            src="/images/jared-subia-nACVS3aI8KI-unsplash.jpg"
+            sx={{
+              width: 150,
+              height: 150,
 
-        <Typography variant="h5" component="h1" sx={{ fontWeight: 'bold' }}>
-          ゆみやで
-        </Typography>
+            }}
+          />
+          <Avatar
+            src="/images/photo-1625861077583-3c6ce451ff42.avif"
+            sx={{
+              width: 150,
+              height: 150,
 
-        <Typography variant="body1">身長: 160cm</Typography>
-        <Typography variant="body1">体重: 50kg</Typography>
-        <Typography variant="body1">趣味: 料理、読書、格闘技</Typography>
+            }}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: { xs: 'center', md: 'flex-start' },
+            padding: '40px',
+            backgroundColor: '#f9f9f9',
+            width: '100%',
+
+
+          }}
+        >
+          <Typography variant="h5" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
+            ゆみやで
+          </Typography>
+          <Typography variant="body1" sx={{ marginBottom: 2, borderBottom: '1px solid lightgray' ,            lineHeight: '1.6'}}>
+            こんにちは！私は料理、読書、そして格闘技が大好きな人です。料理をするとき、新しいレシピを試すことでいつもキッチンが生き生きとします。一方で、本を読むことは私に別の世界への扉を開いてくれます。また、格闘技に挑戦することで、精神的にも肉体的にも強くなることを学びます。
+          </Typography>
+          <Typography variant="body1" sx={{lineHeight: '1.6'}}>
+            将来の夢は、自分のカフェを開くことです。このカフェでは、私が世界中から集めたお気に入りの本を客に提供し、同時に健康的で革新的な料理を提供したいと考えています。この場所が、人々が集まり、新たな発見をし、元気づけられる空間になることを願っています。みなさんにお会いできる日を楽しみにしています！
+          </Typography>
+        </Box>
       </Box>
     </Container>
   );

@@ -5,19 +5,32 @@ import { josefinSans, mPlus1Code } from './font';
 
 const fontFamily = [josefinSans.style.fontFamily, mPlus1Code.style.fontFamily].join(' ');
 
-// Create a theme instance.
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4fa479',
+      main: '#fb8500',
     },
   },
   typography: {
     fontFamily: fontFamily,
     button: {
-      color: '#4fa479',
-      fontWeight: 700,
       textDecoration: 'none',
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          backgroundColor: '#fb8500',
+          color: 'white',
+          '&:hover': {
+            backgroundColor: '#ffb703',
+            color: 'white',
+          },
+        },
+      },
     },
   },
 });

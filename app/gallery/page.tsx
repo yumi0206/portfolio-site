@@ -1,4 +1,3 @@
-'use client';
 import { Category, GalleryType } from '../_libs/microcms';
 import { client } from '../client';
 import GalleryComponent from '../_components/Gallery/GalleryComponent';
@@ -14,9 +13,8 @@ const getData = async (): Promise<GalleryResponse> => {
       endpoint: 'galleries',
       queries: { limit: 100 },
       customRequestInit: {
-        next: {
-          revalidate: 3600,
-        },
+        cache: 'no-store',
+    
       },
     });
 

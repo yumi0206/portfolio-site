@@ -10,6 +10,7 @@ import theme from './_libs/theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { josefinSans, mPlus1Code } from './_libs/font';
+import ToastProvider from './_components/Toast/ToastProvider';
 
 export const revalidate = 60;
 
@@ -50,11 +51,13 @@ export default async function RootLayout({ children }: Props) {
       ></Script>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <body>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </body>
+        <ToastProvider>
+          <body>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </body>
+        </ToastProvider>
       </ThemeProvider>
     </html>
   );

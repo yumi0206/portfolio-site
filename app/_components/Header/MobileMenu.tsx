@@ -18,7 +18,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ open, handleMobileDrawerClose }
       onClose={handleMobileDrawerClose}
       sx={{
         '& .MuiDrawer-paper': {
-          width: '90%',
+          width: '80%',
           maxWidth: '500px',
         },
       }}
@@ -32,14 +32,18 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ open, handleMobileDrawerClose }
         }}
       >
         <IconButton onClick={handleMobileDrawerClose}>
-          <CancelIcon />
-          <BubbleChartIcon />
+          <CancelIcon sx={{ color: 'primary.main' }} />
         </IconButton>
       </Box>
-      <List>
+      <List sx={{ color: 'primary.main'}}>
         <Link href="/about" passHref>
           <ListItem button onClick={handleMobileDrawerClose}>
             <ListItemText primary="About" />
+          </ListItem>
+        </Link>
+        <Link href="/blog" passHref>
+          <ListItem button onClick={handleMobileDrawerClose}>
+            <ListItemText primary="Blog" />
           </ListItem>
         </Link>
         <Link href="/gallery" passHref>
@@ -50,6 +54,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ open, handleMobileDrawerClose }
         <Link href="/contact" passHref>
           <ListItem button onClick={handleMobileDrawerClose}>
             <ListItemText primary="Contact" />
+          </ListItem>
+        </Link>
+        <Link href="/login" passHref>
+          <ListItem button onClick={handleMobileDrawerClose}>
+            <ListItemText primary="Login" />
           </ListItem>
         </Link>
       </List>

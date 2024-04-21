@@ -11,7 +11,7 @@ export default function Sheet({ children }: Props) {
       sx={{
         position: 'relative',
         width: '100%',
-        margin: '-40px auto 0',
+        margin: ' auto 0',
         padding: { xs: '10px', sm: '30px', md: '80px' },
         borderRadius: '8px',
       }}

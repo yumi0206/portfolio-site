@@ -2,14 +2,14 @@
   position: relative;
   background-color: #c4c3bf;
   width: 100%;
-  margin: -40px auto 0;
+  margin:auto;
   padding: 80px;
   border-radius: 8px;
 }
 
 @media (max-width: 920px) {
   .container {
-    width: calc(100% - 80pxa);
+    width: calc(100% - 80px);
   }
 }
 

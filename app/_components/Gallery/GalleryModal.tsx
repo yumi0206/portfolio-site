@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { Modal, Box, Button } from '@mui/material';
+import { Modal, Box} from '@mui/material';
 
 type GalleryModalProps = {
   showModal: boolean;
@@ -29,8 +29,10 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
           transform: 'translate(-50%, -50%)',
           width: 'auto',
           maxWidth: '90%',
+          minHeight: '200px',
+          minWidth: '200px',
           bgcolor: 'background.paper',
-          border: '2px solid #000',
+
           boxShadow: 24,
           p: 2,
           outline: 'none',
@@ -38,9 +40,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         <Image src={selectedImage} alt="Selected" width={800} height={450} layout="responsive" />
-        <Button variant="contained" onClick={handleCloseModal} sx={{ mt: 2 }}>
-          Close
-        </Button>
+
       </Box>
     </Modal>
   );
