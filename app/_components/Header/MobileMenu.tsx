@@ -2,7 +2,6 @@
 import React from 'react';
 import { Drawer, List, ListItem, ListItemText, IconButton, Box } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
-import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import Link from 'next/link';
 
 interface MobileMenuProps {

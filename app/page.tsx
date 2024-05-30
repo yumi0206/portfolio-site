@@ -30,9 +30,7 @@ export default async function HomePage() {
         <Image
           src={todaysImage?.image.url || '/avater.jpg'}
           alt={todaysImage?.caption || 'caption'}
-          width={500}
-          height={500}
-          layout="responsive"
+      
         />
       </Link>
     </Box>

@@ -4,7 +4,6 @@ import { getMeta } from '@/app/_libs/microcms';
 import Footer from '@/app/_components/Footer';
 import Header from '@/app/_components/Header';
 import './globals.css';
-
 import theme from './_libs/theme';
 
 import CssBaseline from '@mui/material/CssBaseline';
